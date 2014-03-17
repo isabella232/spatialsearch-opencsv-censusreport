@@ -1,0 +1,51 @@
+﻿<Window x:Class="CensusReport.Config.CensusReportDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:opsDash="clr-namespace:ESRI.ArcGIS.OperationsDashboard;assembly=ESRI.ArcGIS.OperationsDashboard"
+        xmlns:opsDashCtl="clr-namespace:ESRI.ArcGIS.OperationsDashboard.Controls;assembly=ESRI.ArcGIS.OperationsDashboard"
+        Style="{StaticResource SizableModalDialogWindowStyle}"
+        WindowStartupLocation="CenterOwner"
+        Width="400"
+        Height="150"
+        Title="Configure Generate Report">
+
+  <Grid Background="{DynamicResource DialogBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <Grid Margin="5">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <!--Study area radius-->
+      <TextBlock Text="Study area radius (miles):" Style="{StaticResource SettingLabelStyle}" />
+      <TextBox Grid.Column="1" Margin="5" VerticalAlignment="Top" Style="{StaticResource ThemedTextBoxStyle}"
+               MaxHeight="20"
+               TextChanged="RadiusChanged"  
+               Text="{Binding BufferRadius, Mode=TwoWay}"/>
+
+      <!--Data source selector-->
+      <TextBlock Grid.Row="1" Text="Data Source:" VerticalAlignment="Top" Style="{StaticResource SettingLabelStyle}" />
+      <opsDashCtl:DataSourceSelector x:Name="DataSourceSelector" Grid.Row="1" Grid.Column="1" Height="24"/>
+    </Grid>
+
+    <Border Grid.Row="1" Style="{DynamicResource DialogFooterBorderStyle}">
+      <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button MinWidth="65" Padding="5,0" Height="25" Margin="5,5,0,5" Content="OK" 
+                Click="OKButton_Click" 
+                IsEnabled="{Binding CanOk}"/>
+        <Button MinWidth="65" Padding="5,0" Height="25" Margin="5" Content="Cancel" IsCancel="True" />
+      </StackPanel>
+    </Border>
+
+  </Grid>
+</Window>

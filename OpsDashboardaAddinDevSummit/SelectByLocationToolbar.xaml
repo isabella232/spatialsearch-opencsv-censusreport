@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="SelectByLocation.SelectByLocationToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:opsDash="clr-namespace:ESRI.ArcGIS.OperationsDashboard;assembly=ESRI.ArcGIS.OperationsDashboard"
+             xmlns:converter="clr-namespace:SelectByLocation.Converters"
+             mc:Ignorable="d" 
+             d:DesignWidth="400">
+  <Grid HorizontalAlignment="Stretch">
+    <Border MinHeight="25" Padding="5,0,5,0" BorderThickness="0,0,1,0" BorderBrush="LightGray" VerticalAlignment="Center"
+            Background="{DynamicResource ApplicationBackgroundBrush}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5">
+          <!--Target layer-->
+          <TextBlock Text="Select from target layers" VerticalAlignment="Center"/>
+          <TextBlock Style="{StaticResource SettingLabelStyle}" Text="{Binding FirstLayerText, StringFormat='&quot;{0}&quot;'}"/>
+
+          <!--More target layers-->
+          <StackPanel Orientation="Horizontal" Visibility="{Binding TargetDataSources, Converter={converter:CountToVisibilityConverter}}">
+            <TextBlock Text="and " VerticalAlignment="Center"/>
+            <Image Source="/OpsDashboardaAddinDevSummit;component/Images/toggle_expand.png" Stretch="None">
+              <Image.ToolTip>
+                <TextBlock TextAlignment="Left" Text="{Binding MoreLayersText}"/>
+              </Image.ToolTip>
+            </Image>
+          </StackPanel>
+
+          <!--Source layer-->
+          <TextBlock Text=" using the source features from" VerticalAlignment="Center"/>
+          <TextBlock Style="{StaticResource SettingLabelStyle}" Text="{Binding SourceLayer.DisplayName, StringFormat='&quot;{0}&quot;'}"/>
+
+          <!--Operators-->
+          <TextBlock Text=". Selection method:" VerticalAlignment="Center"/>
+          <ComboBox Style="{StaticResource ThemedComboBoxStyle}" Margin="5,0,5,0" Width="270" 
+                          ItemsSource="{Binding SpatialOperators.AvailableOperators}" 
+                          DisplayMemberPath="DisplayText"
+                          ItemStringFormat=" {0}"
+                          SelectedItem="{Binding SelectedOperator, Mode=TwoWay}"/>
+
+          <!---Use Distance-->
+          <StackPanel Orientation="Horizontal" Visibility="{Binding SelectedOperator, Converter={converter:OperatorToVisibilityConverter}}">
+            <TextBox VerticalAlignment="Center" Width="50" Margin="5,0,5,0" 
+                         Text="{Binding Distance}"/>
+            <ComboBox VerticalAlignment="Center" Style="{StaticResource ThemedComboBoxStyle}" Margin="5,0,5,0" Width="85" 
+                          ItemsSource="{Binding Units}"
+                          DisplayMemberPath="String"
+                          SelectedValue="{Binding SelectedUnit, Mode=TwoWay}"/>
+          </StackPanel>
+        </WrapPanel>
+
+        <!--Select and Done buttons-->
+        <WrapPanel Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5" HorizontalAlignment="Right">
+          <Button MinWidth="65" MinHeight="25" Content="Select"  Margin="5,0,5,0"
+                  Style="{StaticResource ToolbarCancelButtonStyle}"
+                  Click="btnSelect_Click"/>
+          <Button MinWidth="65" MinHeight="25" Content="Done" 
+                  Style="{StaticResource ToolbarCancelButtonStyle}"
+                  Click="btnDone_Click"/>
+        </WrapPanel>
+      </Grid>
+
+      <Border.Effect>
+        <DropShadowEffect Color="LightGray" BlurRadius="3" ShadowDepth="3" Direction="260" />
+      </Border.Effect>
+    </Border>
+  </Grid>
+</UserControl>
+    

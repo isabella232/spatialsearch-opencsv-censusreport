@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="DataHandler.CsvWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:opsDash="clr-namespace:ESRI.ArcGIS.OperationsDashboard;assembly=ESRI.ArcGIS.OperationsDashboard"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+  <Grid Margin="10" Name="_grid">
+    <Grid.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+          <ResourceDictionary Source="./Resources/DataGridStyle.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+    </Grid.Resources>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+      <CheckBox Style="{StaticResource ThemedNoAnimationCheckboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2"
+              x:Name="DrawFeatures" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+      <TextBlock Style="{StaticResource SettingLabelStyle}" Text="Draw features on map"/>
+    </StackPanel>
+    <DataGrid x:Name="FeatureGrid" Grid.Row="1" AutoGenerateColumns="False" SelectionMode="Single"/>
+  </Grid>
+</UserControl>
