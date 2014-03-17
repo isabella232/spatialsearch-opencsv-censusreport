@@ -67,7 +67,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
                                  
 A copy of the license is available in the repository's
-[license.txt](https://github.com/esri/spatialsearch-opencsv-createcensusreport/blob/master/license.txt) file.
+[license.txt](https://github.com/esri/spatialsearch-opencsv-censusreport/blob/master/license.txt) file.
                                                                   
 [](Esri Tags: Dev Summit)
 [](Esri Tags: 2014)
