@@ -1,4 +1,4 @@
-spatialsearch-opencsv-createcensusreport
+spatialsearch-opencsv-censusreport
 ========================================
 
 An Operations Dashboard for ArcGIS addin with a map tool that supports selection by location, a widget that opens a CSV file, and a feature action that generates a census report.
